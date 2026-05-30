@@ -1,0 +1,21 @@
+# Environment files (keep secrets out of git)
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+
+# Tooling / local app state
+.adk/
+.vscode/
+
+# Local notes
+Understand_this.md

@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "mongodb": {
+      "command": "npx",
+      "args": ["-y", "mongodb-mcp-server@latest"],
+      "env": {
+        "MDB_MCP_CONNECTION_STRING": "${MONGODB_URI}"
+      },
+      "readOnly": true,
+      "timeout": 30
+    }
+  }
+}

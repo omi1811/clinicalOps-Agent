@@ -1,0 +1,14 @@
+google-adk>=2.0.0
+pymongo[srv]
+motor 
+fastapi
+uvicorn 
+streamlit 
+python-dotenv 
+pydantic 
+mcp 
+google-cloud-aiplatform 
+google-cloud-secret-manager 
+google-cloud-logging
+dotenv
+pymongo
