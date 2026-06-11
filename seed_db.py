@@ -5,6 +5,9 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 from pathlib import Path
 from datetime import datetime
+from utils.logger import get_logger
+      
+logger = get_logger(__name__) 
 
 load_dotenv()
 
@@ -14,7 +17,7 @@ DB_NAME = os.getenv("MONGODB_DB_NAME", "clinicalops")
 client = MongoClient(MONGO_URI)
 db = client[DB_NAME]
 
-print(f"🗄️  Connected to MongoDB: {DB_NAME}")
+logger.info(f"🗄️  Connected to MongoDB: {DB_NAME}")
 
 # 1. Seed Patients
 patients = [
@@ -38,7 +41,7 @@ patients = [
     }
 ]
 db.patients.insert_many(patients)
-print(f"✅ Inserted {len(patients)} patients")
+logger.info(f"✅ Inserted {len(patients)} patients")
 
 # 2. Seed Trial Protocols
 trials = [
@@ -67,7 +70,7 @@ trials = [
     }
 ]
 db.trials.insert_many(trials)
-print(f"✅ Inserted {len(trials)} trials")
+logger.info(f"✅ Inserted {len(trials)} trials")
 
 # 3. Seed Adverse Events (Mock)
 aes = [
@@ -91,7 +94,7 @@ aes = [
     }
 ]
 db.adverse_events.insert_many(aes)
-print(f"✅ Inserted {len(aes)} adverse events")
+logger.info(f"✅ Inserted {len(aes)} adverse events")
 
-print("\n🎉 Database seeded successfully! Ready for agent testing.")
+logger.info("\n🎉 Database seeded successfully! Ready for agent testing.")
 client.close()

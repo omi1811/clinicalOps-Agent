@@ -2,12 +2,16 @@
   "mcpServers": {
     "mongodb": {
       "command": "npx",
-      "args": ["-y", "mongodb-mcp-server@latest"],
+      "args": ["--yes", "--prefer-offline", "mongodb-mcp-server@latest"],
       "env": {
-        "MDB_MCP_CONNECTION_STRING": "${MONGODB_URI}"
+        "MDB_MCP_CONNECTION_STRING": "${MONGODB_URI}",
+        "MDB_MCP_DISABLED_TOOLS": "assistant,atlas-local,mongodb-logs,export,explain,db-stats,collection-storage-size,aggregate-db,aggregate,create-collection,create-index,delete-many,drop-collection,drop-database,drop-index,rename-collection,update-many",
+        "MDB_MCP_TELEMETRY": "disabled",
+        "MDB_MCP_MAX_DOCUMENTS_PER_QUERY": "5",
+        "MDB_MCP_MAX_BYTES_PER_QUERY": "200000"
       },
       "readOnly": true,
-      "timeout": 30
+      "timeout": 60
     }
   }
 }

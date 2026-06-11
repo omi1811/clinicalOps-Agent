@@ -1,48 +1,27 @@
 ﻿from google.adk.agents import Agent
-from google.adk.tools.mcp_tool import McpToolset, StdioConnectionParams
-from mcp import StdioServerParameters
-import os
-from dotenv import load_dotenv
 
-load_dotenv()
+from agents.shared_mcp import shared_mcp_toolset
 
 ae_triage_agent = Agent(
-    model="gemini-3.5-flash",
     name="ae_triage",
-    description="Triage adverse events using CTCAE v5.0 grading",
+    model="gemini-2.5-flash",
+    description="Adverse event triage specialist.",
     instruction="""
     You are an adverse event triage specialist.
-    
-    TASK:
-    1. Extract from free-text: symptom, severity, onset, causality
-    2. Map to CTCAE v5.0 grade (1=mild, 2=moderate, 3=severe, 4=life-threatening, 5=death)
-    3. Flag SAE if: grade≥3 OR hospitalization OR life-threatening OR disability
-    4. Return structured JSON:
-       {
-         "ae_description": str,
-         "ctcae_grade": int (1-5),
-         "is_sae": bool,
-         "meddra_codes": [str],
-         "reporting_obligation": "24h" | "7d" | "routine",
-         "action_required": str
-       }
-    5. Insert record to MongoDB 'adverse_events' collection via MCP
-    
-    RULES:
-    - When in doubt, escalate (conservative grading)
-    - Always include MedDRA SOC terms when possible
-    - SAE = immediate reporting to sponsor/IRB
+
+    Database name: clinicalops
+    Collections: patients, adverse_events
+
+    STEPS:
+    1. Use MongoDB MCP to retrieve the patient record from the patients collection in the clinicalops database
+    2. Use MongoDB MCP to fetch any prior adverse events for this patient from the adverse_events collection in the clinicalops database
+    3. Assess the reported event against CTCAE v5 criteria
+    4. Insert the triaged AE record into the adverse_events collection in the clinicalops database
+
+    OUTPUT (Markdown only):
+    - CTCAE grade and justification
+    - SAE status (Yes/No) with rationale
+    - Regulatory reporting obligation (7-day / 15-day / none)
     """,
-    tools=[
-        McpToolset(
-            connection_params=StdioConnectionParams(
-                server_params=StdioServerParameters(
-                    command="npx", 
-                    args=["-y", "mongodb-mcp-server@latest"],
-                    env={"MDB_MCP_CONNECTION_STRING": os.getenv("MONGODB_URI")},
-                ),
-                timeout=30,
-            ),
-        )
-    ],
+    tools=[shared_mcp_toolset],
 )

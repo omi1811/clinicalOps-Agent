@@ -1,0 +1,7 @@
+# .adkignore (optional - reduces ADK CLI noise)
+frontend/
+auth/
+data/
+mcp/
+*.pyc
+__pycache__/

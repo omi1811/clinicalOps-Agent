@@ -1,3 +1,7 @@
-from app import app as clinicalops_app
+# agents/agent.py
+# Entry point for `adk web` — exposes root_agent directly from the orchestrator
+# to avoid circular imports with app.py
 
-root_agent = clinicalops_app.root_agent
+from agents.orchestrator import orchestrator_agent
+
+root_agent = orchestrator_agent

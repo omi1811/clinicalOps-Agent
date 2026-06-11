@@ -1,0 +1,9 @@
+C:\Users\shrot\OneDrive\Desktop\ClinicalOps-Agent\.venv\Lib\site-packages\google\adk\features\_feature_decorator.py:72: UserWarning: [EXPERIMENTAL] feature FeatureName.PLUGGABLE_AUTH is enabled.
+  check_feature_enabled()
+Deprecated. Please migrate to the async method.
+C:\Users\shrot\OneDrive\Desktop\ClinicalOps-Agent\.venv\Lib\site-packages\google\adk\tools\mcp_tool\mcp_toolset.py:315: UserWarning: [EXPERIMENTAL] feature FeatureName._MCP_GRACEFUL_ERROR_HANDLING is enabled.
+  session = await self._mcp_session_manager.create_session(
+C:\Users\shrot\OneDrive\Desktop\ClinicalOps-Agent\.venv\Lib\site-packages\google\adk\features\_feature_decorator.py:72: UserWarning: [EXPERIMENTAL] feature FeatureName.BASE_AUTHENTICATED_TOOL is enabled.
+  check_feature_enabled()
+C:\Users\shrot\OneDrive\Desktop\ClinicalOps-Agent\.venv\Lib\site-packages\google\adk\models\llm_request.py:256: UserWarning: [EXPERIMENTAL] feature FeatureName.JSON_SCHEMA_FOR_FUNC_DECL is enabled.
+  declaration = tool._get_declaration()

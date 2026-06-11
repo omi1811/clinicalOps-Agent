@@ -1,0 +1,17 @@
+.venv
+__pycache__
+.git
+.gitignore
+.env
+.env.development
+.env.example
+*.pyc
+*.pyo
+*.pyd
+node_modules
+.streamlit
+firebase_key.json
+firebase-admin-key.json
+*.md
+agent.md
+plan.md
